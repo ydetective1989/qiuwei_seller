@@ -1,4 +1,8 @@
+<?php include 'config.php'; ?>
 <?php include 'head.php'; ?>
+
+
+
 <script>
 function strto(str){
   var obj = {};//
@@ -26,43 +30,69 @@ function strto(str){
 
 
 <?php
-$pri = 123456789;
-function price($pri){
-  $len = strlen($pri);//获取参数的字符串长度
-  switch ($pri) {
-    case 1:
-      echo "壹";
-      return;
-    case 2:
-      echo "贰";
-      return;
-    case 3:
-      echo "叁";
-      return;
-    case 4:
-      echo "肆";
-      return;
-    case 5:
-      echo "伍";
-      return;
-    case 6:
-      echo "陆";
-      return;
-    case 7:
-      echo "柒";
-      return;
-    case 8:
-      echo "捌";
-      return;
-    case 9:
-      echo "玖";
-      return;
-    case 0:
-      echo "零";
-      return;
-  }
+$str = "asaaadasdasdasdgasgfhfghrwetwerwrwerwersdzxczx";
+function strtoarr($str){//字符串转化为数组
+  $str = chunk_split($str,1,",");
+  $str = explode(",",$str);
+  return $str;
 }
-  price($pri);
+function strtone($str){
+  $str = strtoarr($str);
+  $arr = array();
+  $count = count($str);
+  for($i=0;$i<$count;$i++){
+    if($arr[$str[$i]] != $str[$i] ){
+      $arr[$str[$i]] = $str[$i];
+    }
+  }
+  $newstr = implode("",$arr);
+  return $newstr;
+}
+echo $str."<br />";
+echo strtone($str);
+
+
+
+
+
+
+// $pri = 123456789;
+// function price($pri){
+//   $len = strlen($pri);//获取参数的字符串长度
+//   switch ($pri) {
+//     case 1:
+//       echo "壹";
+//       return;
+//     case 2:
+//       echo "贰";
+//       return;
+//     case 3:
+//       echo "叁";
+//       return;
+//     case 4:
+//       echo "肆";
+//       return;
+//     case 5:
+//       echo "伍";
+//       return;
+//     case 6:
+//       echo "陆";
+//       return;
+//     case 7:
+//       echo "柒";
+//       return;
+//     case 8:
+//       echo "捌";
+//       return;
+//     case 9:
+//       echo "玖";
+//       return;
+//     case 0:
+//       echo "零";
+//       return;
+//   }
+// }
+//   price($pri);
 
 
 
