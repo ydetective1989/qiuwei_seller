@@ -1,9 +1,44 @@
 <?php include 'config.php'; ?>
-<?php include 'head.php'; ?>
-
-
-
+<style>
+.content{
+  background : green;
+  border: solid 1px ;
+  width: 100px;
+  height: 100px;
+  display: none;
+}
+.active{
+  background-color: yellow;
+}
+</style>
+<button>1</button>
+<button>2</button>
+<button>3</button>
+<div class="content" >12312131321</div>
+<div class="content" >邱哥牛逼</div>
+<div class="content" >伟哥腻害</div>
 <script>
+var btn = document.getElementsByTagName("button");
+var div = document.getElementsByClassName("content");
+var len = btn.length;
+for(var i = 0 ; i < len ; i++){
+  (function(n){
+    btn[n].onclick = function(){
+      for(var j = 0 ; j < len ; j ++){
+        div[j].style.display = "none";
+        btn[j].class = "";
+      }
+      btn[n].class = "active";
+      div[n].style.display = "block";
+    }
+
+  }(i))
+}
+
+
+</script>
+
+<!-- <script>
 function strto(str){
   var obj = {};//
   var arr = [];
@@ -29,7 +64,7 @@ function strto(str){
 </script>
 
 
-<?php
+
 $str = "asaaadasdasdasdgasgfhfghrwetwerwrwerwersdzxczx";
 function strtoarr($str){//字符串转化为数组
   $str = chunk_split($str,1,",");
@@ -50,7 +85,7 @@ function strtone($str){
 }
 echo $str."<br />";
 echo strtone($str);
-
+?>
 
 
 
@@ -122,7 +157,7 @@ echo strtone($str);
  ?>
 
  <button type="button" onclick="test()">测试</button>
-<!-- <script>
+<script>
 function send(){
   var name = $("#name").val();
   $.ajax({
@@ -136,10 +171,10 @@ function send(){
   });
 }
 </script> -->
-<div id="ajax"></div>
+<!-- <div id="ajax"></div>
 
-<input type="text"  id="count">
-<script>
+<input type="text"  id="count"> -->
+<!-- <script>
 function test(){
   if(document.getElementById("block")){
     var block = document.getElementById("block").value;
@@ -165,8 +200,8 @@ function test(){
       xmlhttp.open("GET","ajaxresponse.php?count="+count,true);
   }
       xmlhttp.send();
-}
-
+} -->
+<script>
 // Grand.prototype.lastName = "qiu";
 // function Grand(){
 //   this.name = "gaogui";
