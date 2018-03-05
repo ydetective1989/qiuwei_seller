@@ -67,7 +67,7 @@ if(isset($_GET)&&!empty($_GET)){
   $counts += $count;
   $per = $counts/100;
   echo $counts;
-  echo '<progress id="block" max="1" value="'.$per.'">';
+  echo '<progress id-"" max="1" value="'.$per.'">';
 
 }
 //   if($name){
