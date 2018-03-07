@@ -50,11 +50,14 @@ if($_POST){
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="jquery-3.2.1.min.js" >
 </script>
+
 <script type="text/javascript" src="layui.js" >
 </script>
+  <!-- <script  type="text/javascript" src="app.js"></script> -->
 <link rel="stylesheet" href="css\layui.css">
 </head>
 <body class="layui-layout-body">
+
 <form class="layui-form" action="" method="post">
 
   <div class="layui-form-item">
@@ -114,8 +117,15 @@ if($_POST){
 
     </div>
   </div>
+  <script  type="text/javascript" src="append.js"></script>
+
   <script>
   function addpro(){
+    var n = document.getElementsByTagName("tr");
+    if(n.length > 5){
+      alert("不能超过5个商品");
+      return;
+    }
     $.post('add_product.php', {}, function(str){
          layer.open({
           type: 1,
@@ -140,15 +150,22 @@ if($_POST){
                  }
            });
         };
+// var x = document.getElementById("products");
+// x.onclick = function(){
+//   var e = e || window.event;
+//   var target = e.target || e.srcElement;
+//   if(target.nodeName == "BUTTON"){
+//     target.parentNode.parentNode.parentNode.removeChild(target.parentNode.parentNode);
+//   }
+//
+// }
+//     // function del(thisis){
+//     //   var n = window.confirm("确认是否删除?");
+//     //   if(n == true){
+//     //   thisis.parentNode.parentNode.parentNode.removeChild(thisis.parentNode.parentNode);
+//     // }
 
-    function del(thisis){
-      var n = window.confirm("确认是否删除?");
-      if(n == true){
-      thisis.parentNode.parentNode.parentNode.removeChild(thisis.parentNode.parentNode);
-    }
 
-
-    }
   </script>
   <div class="layui-form-item">
     <label class="layui-form-label">邮费</label>
@@ -166,10 +183,6 @@ if($_POST){
       <input type="date" id="buydate" name="buydate" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
     </div>
   </div>
-
-
-
-
 
   <div class="layui-form-item layui-form-text">
     <label class="layui-form-label">备注</label>

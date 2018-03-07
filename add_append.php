@@ -12,7 +12,7 @@ $iteam = $db->getRow($query);
       <td><?php echo '<input type="hidden" class="layui-input" value="'.$iteam['name'].'" name="product[]" >';?><?php echo $iteam['name'] ;?></td>
       <td><?php echo '<input type="text" class="layui-input" value="1" name="count[]" > ';?></td>
       <td><?php echo '<input type="text" class="layui-input" value="" name="price[]" > '; ?></td>
-      <td><?php echo '<button type="button" onclick="del(this)">X</button>'; ?></td>
+      <td><?php echo '<button type="button" >X</button>'; ?></td>
       </tr>
 
 <?php } ?>

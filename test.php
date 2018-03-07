@@ -1,338 +1,108 @@
-<?php include 'config.php'; ?>
-<style media="screen">
-  li{
-    width: 5px;
-    height: 5px;
-    border: solid 0.1px red;
-    float: left;
-  }
-  ul{
-    list-style-type: none;
-  }
-  .sty{
-    width: 200px;
-    height: 200px;
+<?php require 'config.php'; ?>
 
-  }
-</style>
-<script>
-var ul = document.getElementsByTagName("ul")[0];
-ul.onmouseover = function(e){
+<!-- <script>
+var box  = document.getElementById("box");
+box.onmouseover = function(){
   var e = e || window.event;
-  var target = e.target || e.srcElement;
+  var target = e.target || e.srcElement
+  if(target.nodeName == "INPUT"){
+    switch (target.id) {
+      case "add":
+      target.style.color = "red";
+        break;
+        case "remove":
+        target.style.color = "red";
+
+          break;
+          case "move":
+          target.style.color = "red";
+
+            break;
+            case "select":
+            target.style.color = "red";
+
+              break;
+
+    }
+  }
+  box.onmouseout = function(){
+    var e = e || window.event;
+    var target = e.target || e.srcElement
+    if(target.nodeName == "INPUT"){
+      switch (target.id) {
+        case "add":
+        target.style.color = "black";
+          break;
+          case "remove":
+          target.style.color = "black";
+
+            break;
+            case "move":
+            target.style.color = "black";
+
+              break;
+              case "select":
+              target.style.color = "black";
+
+                break;
+
+      }
+    }
+
 }
-
-
+}
 </script>
-<body>
-<div class="sty">
-<ul >
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>  <li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
 
-</ul>
-</div>
-</body>
+<div id="box">
+        <input type="button" id="add" value="添加" />
+        <input type="button" id="remove" value="删除" />
+        <input type="button" id="move" value="移动" />
+        <input type="button" id="select" value="选择" />
+    </div>
 
+    <input type="button" name="" id="btn" value="添加" />
+        <ul id="ul1" style="list-style:none;">
+            <li >111</li>
+            <li>222</li>
+            <li>333</li>
+            <li >444</li>
+        </ul>
+
+<script>
+ var btn = document.getElementById("btn");
+ btn.onclick = function(){
+   var n = document.createElement("li");
+   n.setAttribute("onclick","del(this)");
+   n.innerHTML = "555";
+   ul.appendChild(n);
+ }
+ var ul = document.getElementsByTagName("ul")[0];
+
+ ul.onmouseover = function(){
+   var e = e || window.event;
+   var target = e.target || e.srcElement;
+   if(target.nodeName == "LI"){
+     target.style.color = "red";
+   }
+
+ }
+ ul.onmouseout = function(){
+   var e = e || window.event;
+   var target = e.target || e.srcElement;
+    if(target.nodeName == "LI"){
+      target.style.color = "black";
+    }
+ }
+
+ ul.onclick = function(){
+   var e = e || window.event;
+   var target = e.target || e.srcElement;
+    if(target.nodeName == "LI"){
+      target.remove();
+    }
+ }
+
+</script> -->
 
 
 <!-- <script>
