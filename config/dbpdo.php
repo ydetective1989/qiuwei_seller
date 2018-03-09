@@ -163,7 +163,7 @@ class dbpdo
 
 	Public Function getRows($sql,$args=array())
 	{
-		if($this->connectId == null) $this->connect();
+		if($this->connectId == null) $this->connect();//数据库未链接时候，调用connect();
 		$result = array();   //返回数据集
 		$this->PDOStatement = $this->connectId->prepare($sql);
 		$this->PDOStatement->execute();

@@ -1,5 +1,326 @@
 <?php require 'config.php'; ?>
+<?php require "head.php" ; ?>
+<?php
+function connect($dbhost,$dbname,$password,$dbname){
+  $con = mysql_connect("localhost","root","qw198543");
+  if(!$con){
+    die("链接失败");
+  }
+  $db = mysql_select_db("blog",$con);
+  if(!$db){
+    die("未找到数据库");
+  }
+  return $con;
+}
 
+
+function getRow($query){
+  connect()
+  $result = mysql_query($query);
+  $row = mysql_fetch_assoc($result);
+  return $row;
+}
+function getRows($query){
+  $result = mysql_query($query);
+  while($row = mysql_fetch_assoc($result)){
+     $arr[] = $row;
+  }
+  return $arr;
+}
+$query = "SELECT * FROM user WHERE name = 'qiuwei'";
+$a = getRow($query);
+echo $a['phone'];
+
+
+
+
+
+// $n = 10000;
+// echo toChineseNumber($n);//壹拾贰亿叁仟肆佰伍拾陆万柒仟捌佰玖拾圆
+// function toChineseNumber($money){
+//   $money = round($money,2);
+//   $cnynums = array("零","壹","贰","叁","肆","伍","陆","柒","捌","玖");
+//   $cnyunits = array("圆","角","分");
+//   $cnygrees = array("拾","佰","仟","万","拾","佰","仟","亿");
+//   list($int,$dec) = explode(".",$money,2);
+//   $dec = array_filter(array($dec[1],$dec[0]));
+//   $ret = array_merge($dec,array(implode("",cnyMapUnit(str_split($int),$cnygrees)),""));
+//   $ret = implode("",array_reverse(cnyMapUnit($ret,$cnyunits)));
+//   return str_replace(array_keys($cnynums),$cnynums,$ret);
+// }
+// function cnyMapUnit($list,$units) {
+//   $ul=count($units);
+//   $xs=array();
+//   foreach (array_reverse($list) as $x) {
+//     $l=count($xs);
+//     if ($x!="0" || !($l%4))
+//       $n=($x=='0'?'':$x).($units[($l-1)%$ul]);
+//     else $n=is_numeric($xs[0][0])?$x:'';
+//  array_unshift($xs,$n);
+//  }
+//  return $xs;
+//  }
+
+
+// function tra($target){
+//   switch ($target) {
+//     case 1:
+//     return "壹";
+//     case 2:
+//     return "贰";
+//     case 3:
+//     return "仨";
+//     case 4:
+//     return "肆";
+//     case 5:
+//     return "伍";
+//     case 6:
+//     return "陆";
+//     case 7:
+//     return "柒";
+//     case 8:
+//     return "捌";
+//     case 9:
+//     return "玖";
+//     case 0:
+//     return "零";
+//     default:
+//       echo "请输入正确数字";
+//       break;
+//   }
+// }
+// function add_unit($unit){
+//   switch ($unit) {
+//     case 0:
+//         return "";
+//     case 1:
+//         return "";
+//     case 2:
+//         return "拾";
+//     case 3 :
+//         return "百";
+//     case 4:
+//         return "千";
+//     case 5 :
+//         return "万";
+//     case 6 :
+//         return "拾万";
+//     case 7 :
+//         return "百万";
+//     case 8 :
+//         return "千万";
+//     case 9 :
+//         return "亿";
+//
+//   }
+// }
+//
+// function change($num){
+//   $arr = str_split($num);
+//   $nstr = "";
+//   $count = count($arr);
+//   $date = $count;
+//   for($i = 0; $i < $count ; $i ++){
+//     $nstr .= tra($arr[$i]);
+//     if($date > 8 && $date <= 9 ){
+//       $nstr .= add_unit($date);
+//       $date -= 1;
+//     }else if(5 < $date && $date <= 8 ){
+//       $nstr .= add_unit($date-4);
+//       $date -= 1;
+//     }else if($date <= 5){
+//       $nstr .= add_unit($date);
+//       $date -= 1;
+//     }else if($date >9 ){
+//       $nstr .= add_unit($date - 8);
+//       $date -= 1;
+//     }
+//   }
+//   return $nstr ;
+// }
+// $n = 123456789;
+//  echo change($n);
+//
+
+//将字符串分割成数组，并且每位循环以后返回成大写的名称，并返回数组 利用字符串总长度来判断单位，而后将数组键值后面加上单位，再把数组还原成字符串
+
+ ?>
+<style media="screen">
+  .content{
+    width: 100px;
+    height: 100px;
+    border: solid 1px black;
+    background: red;
+    display: none;
+
+  }
+  .active{
+
+    background-color: yellow;
+
+  }
+
+</style>
+<ul>
+
+<button type="button" class="taboff" id="1" onclick="tabit(1)" >1 <div  class="content">
+111
+ </div></button>
+ <button  type="button" class="taboff" id="2" onclick="tabit(2)" >2 <div  class="content">
+ 222
+  </div></button>
+  <button type="button" class="taboff" id="3" onclick="tabit(3)" >3 <div  class="content">
+  333
+   </div></button>
+</ul>
+
+
+
+
+ <script>
+ var lastTab; //临时存储上次时的tab ID值
+
+ function tabit(cid) {
+
+ //如果上次有存储值，且和本次请求切换的是同一个，那么直接提前结束
+
+ if( lastTab && lastTab == cid)
+           return;
+
+ //否则，改变上次的tab状态为隐藏状态，并且置换本次请求的tab为当前状态
+
+ /*这里要注意考虑第一次触发这个函数的情况，因为这个时候lastTab是undefined，所以直接查找id对应的元素肯定会报js错误的*/
+ if(lastTab) {
+     gi(lastTab).className = "taboff";
+     var n  = gt("button")[(lastTab - 1)];
+     n.getElementsByTagName("div")[0].style.display = "none";
+
+ }
+
+ gi(cid).className="active";
+ var n  = gt("button")[(cid-1)];
+ n.getElementsByTagName("div")[0].style.display = "block";
+
+
+ //最后将本次的tab记录下来以备下次切换使用
+
+ lastTab = cid;
+ }
+
+ //根据id获取对应的元素对象
+
+ function gi(id) {
+
+         return document.getElementById(id);
+
+ }
+function gt(tag){
+  return document.getElementsByTagName(tag);
+}
+
+
+
+ </script>
+ <!-- <script>
+
+ function add(){
+   var n = window.prompt("input");
+   var str = "";
+   var le = n.length;
+   for(l = 0 ; l<n.length-1; l ++){
+     if(tra(n[l])==""){
+       str += tra(n[l])+cha(0);
+       if(tra(n[n.length-4])==""){
+         str += tra(n[n.length-4])+ "零"+cha(0);
+       }
+     }else{
+       str += tra(n[l]) + cha(n.length-l);
+     }
+   //更改数字为大写计数，增加单位写入每位数值背后
+   }
+   //从第一位开始计数  写上单位 依次往下计数，tra（）+cha（）
+   //12345  壹万两千三百四shif
+ document.write(str);
+ }
+
+ function cha(l){//增加单位
+   switch (l) {
+     case 0:
+         return "";
+     case 1:
+         return "";
+     case 2:
+         return "拾";
+     case 3 :
+         return "百";
+     case 4:
+         return "千";
+     case 5 :
+         return "万";
+     case 6 :
+         return "拾万";
+     case 7 :
+         return "百万";
+     case 8 :
+         return "千万";
+
+   }
+ }
+
+ function tra(m){
+   switch (m) {
+     case "1":
+     return "壹";
+
+     case "2":
+     return "两";
+
+     case "3":
+     return "叁";
+
+     case "4":
+     return "肆";
+
+     case "5":
+     return "伍";
+
+     case "6":
+     return "陆";
+
+     case "7":
+     return "柒";
+
+     case "8":
+     return "扒";
+
+     case "9":
+     return "玖";
+
+     case "0":
+     return "";
+
+   }
+ }
+
+
+ </script> -->
+
+ <!-- <div id="products" ></div>
+ <button type="button" onclick="get()" >获取</button>
+ <script>
+ function get(){
+   $.ajax({
+      type: "GET",
+      async: false,
+      url: "index.php",
+      success: function(date){
+       $("#products").append(date);
+         }
+   });
+ }
+
+
+ </script> -->
 <!-- <script>
 var box  = document.getElementById("box");
 box.onmouseover = function(){
