@@ -1,36 +1,58 @@
 <?php require 'config.php'; ?>
 <?php require "head.php" ; ?>
+<div class="">
+  <a href="#"></a>
+  <em></em>
+</div>
+<script>
+
+// Element.prototype.insertAfter = function(target,origin){
+//   var nextorigin = origin.nextSibling;
+//   this.insertBefore(target,nextorigin);
+// }
+// var n = document.createElement("p");
+// var btn = document.getElementsByTagName("button")[0];
+// var ul = document.getElementsByTagName("ul")[0];
+
+</script>
+
+
 <?php
-function connect($dbhost,$dbname,$password,$dbname){
-  $con = mysql_connect("localhost","root","qw198543");
-  if(!$con){
-    die("链接失败");
-  }
-  $db = mysql_select_db("blog",$con);
-  if(!$db){
-    die("未找到数据库");
-  }
-  return $con;
-}
-
-
-function getRow($query){
-  connect()
-  $result = mysql_query($query);
-  $row = mysql_fetch_assoc($result);
-  return $row;
-}
-function getRows($query){
-  $result = mysql_query($query);
-  while($row = mysql_fetch_assoc($result)){
-     $arr[] = $row;
-  }
-  return $arr;
-}
-$query = "SELECT * FROM user WHERE name = 'qiuwei'";
-$a = getRow($query);
-echo $a['phone'];
-
+/**
+ *
+ */
+// class db_connect
+// {
+//
+//   function __construct()
+//   {
+//     $this->connect("localhost","root","qw198543","blog");
+//   }
+//   function connect($dbhost,$root,$password,$dbname){
+//     $con = mysql_connect($dbhost,$root,$password);
+//     if(!$con){
+//       die("链接失败");
+//     }
+//     $db = mysql_select_db($dbname,$con);
+//     if(!$db){
+//       die("未找到数据库");
+//     }
+//   }
+//
+//   function getRow($query){
+//     $result = mysql_query($query);
+//     $row = mysql_fetch_assoc($result);
+//     return $row;
+//   }
+//
+//   function getRows($query){
+//     $result = mysql_query($query);
+//     while($row = mysql_fetch_assoc($result)){
+//        $arr[] = $row;
+//     }
+//     return $arr;
+//   }
+// }
 
 
 
