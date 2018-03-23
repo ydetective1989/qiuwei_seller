@@ -30,3 +30,20 @@ function btgod(){//执行添加商品列表
                }
          });
       };
+function ajax(url,fun,type,bool,data){
+  var xmlhttp = new window.XMLHttpRequest() || new ActiveObject("Microfost XMLHTTP");
+  xmlhttp.onreadystatechange = function(){
+    if(xmlhttp.readyState == 4 && xmlhttp.status == 200 ){
+                  fun;
+    }
+    if(type == "GET"){
+      xmlhttp.open(type,url,bool);
+      xmlhttp.send(data);
+    }
+    if(type == "POST"){
+      xmlhttp.open(type,url,bool);
+      xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+      xmlhttp.send(data);
+    }
+  }
+}

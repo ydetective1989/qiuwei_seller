@@ -1,11 +1,375 @@
 <?php require 'config.php'; ?>
 <?php require "head.php" ; ?>
-<div class="">
-  <a href="#"></a>
-  <em></em>
+<style media="screen">
+  .wrapper{
+    width: 992px;
+    height: 500px;
+    border: 1px black solid;
+    position: relative;
+    overflow: hidden;
+  }
+  .showbox{
+    width: 4950px;
+    height: 500px;
+    transition: all 0.5s;
+  }
+  .arrow{
+    width: 30px;
+    height: 30px;
+    border: 1px black solid;
+    opacity :0.5;
+    background: gray;
+    position: absolute;
+    top: 50%;
+    z-index: 999;
+    }
+  ul{
+    list-style: none;
+  }
+  li{
+    float: left;
+  }
+  li img{
+    width: 990px;
+    height: 500px;
+  }
+  .chose{
+    width: 20px;
+    height: 20px;
+    border-radius:50%;
+    border: 0.3px black solid;
+    background: gray;
+    opacity:0.5;
+    top:90%;
+    z-index: 99;
+    position: absolute;
+  }
+
+</style>
+<div class="wrapper">
+<div style="left:20px;" class="arrow">
+
 </div>
+<div style="right:20px;" class="arrow">
+
+</div>
+<div style="left:40%" class="chose">
+
+</div>
+<div style="left:45%" class="chose">
+
+</div>
+<div style="left:50%" class="chose">
+
+</div>
+<div style="left:55%" class="chose">
+
+</div>
+<div style="left:60%" class="chose">
+
+</div>
+  <div class="showbox" style="position: relative; left:0;">
+    <ul class="img">
+      <li><img src="https://img.alicdn.com/imgextra/i1/249182841/TB2.it5kXXXXXbXXXXXXXXXXXXX_!!249182841.jpg" alt=" 聚划算首页20160207_26.jpg"/></li>
+      <li><img src="https://img.alicdn.com/imgextra/i4/249182841/TB28kx.kXXXXXX7XXXXXXXXXXXX_!!249182841.jpg" alt=" 聚划算首页20160207_29.jpg"/></li>
+      <li><img src="https://img.alicdn.com/imgextra/i2/249182841/TB2emhxkXXXXXbZXpXXXXXXXXXX_!!249182841.jpg" alt=" 聚划算首页20160207_23.jpg"/></li>
+      <li><img src="https://img.alicdn.com/imgextra/i4/249182841/TB2iwXAkXXXXXbhXpXXXXXXXXXX_!!249182841.jpg" alt=" 聚划算首页20160207_16.jpg"/></li>
+      <li><img src="https://img.alicdn.com/imgextra/i2/249182841/TB28GhGkXXXXXX1XpXXXXXXXXXX_!!249182841.jpg" alt=" 聚划算首页20160207_13.jpg"/></li>
+    </ul>
+  </div>
+</div>
+
+<script type="text/javascript">
+    var imgindex = 0 ;//定义一个图片和选择器下标
+    //
+    var div = document.getElementsByClassName("showbox")[0];
+    var arrow = document.getElementsByClassName("arrow");
+    var chose = document.getElementsByClassName("chose");
+    var choselen = chose.length;
+    //自动轮播 考虑是否加入onload事件
+    function automove(){
+      div.style.left = parseInt(div.style.left) - 990 + "px";
+      imgindex ++;
+      if(parseInt(div.style.left) < - 3960){
+        div.style.left = 0 + "px";
+      }
+    }
+    // 自动轮播创建
+    var timer = setInterval("automove()",3000);
+    //自动轮播重新执行
+    function automoveagin(){
+    timer = setInterval("automove()",3000);
+    }
+    function stopmove(){
+      clearInterval(timer);
+      timer = "";//timer值变为空
+    }
+    function next(){
+      div.style.left = parseInt(div.style.left) - 990 + "px";
+      if(parseInt(div.style.left) < - 3960){
+        div.style.left = 0 + "px";
+        imgindex ++;
+      }
+    }
+
+    function previous(){
+      div.style.left = parseInt(div.style.left) + 990 + "px";
+      if(parseInt(div.style.left) > 0){
+        div.style.left = - 3960 + "px";
+      }
+      imgindex --;
+    }
+    //选择器
+
+
+    //给轮播绑定事件
+    div.addEventListener("mouseenter",stopmove,true);
+    div.addEventListener("mouseleave",automoveagin,false);
+    arrow[0].addEventListener("mouseover",stopmove,false);
+    arrow[1].addEventListener("mouseover",stopmove,false);
+    arrow[0].addEventListener("mouseleave",automoveagin,false);
+    arrow[1].addEventListener("mouseleave",automoveagin,false);
+    arrow[0].addEventListener("click",previous,false);
+    arrow[1].addEventListener("click",next,false);
+    //给选择器绑定事件，后续优化为addEventListener
+    for(var i = 0 ; i < choselen; i ++ ){
+      (function(s){
+        chose[s].onclick = function(){
+          for(var m = 0 ; m < choselen ; m ++){
+            chose[m].style.opacity = 0.5
+          }
+          div.style.left = - s * 990 + "px";
+          this.style.opacity = 1;
+          }
+      }(i));
+    }
+
+
+
+</script>
+<!-- <div class="tab" >
+  <div id="products">
+
+  </div>
+<button type="button" onclick="show()" >弹出</button>
+</div>
+<div class="fullbg">
+</div>
+ <div class="showtab">
+   <form class="" action="index.html" method="post">
+     <input type="text" name="" value="">
+     <input type="text" name="" value="">
+     <button type="button" name="send">发送</button>
+     <button type="button" onclick="hide()">关闭</button>
+   </form>
+  </div>
+<div class="">
+  <img onclick="biger()" style="width:80px;height:80px;" src="https://img.alicdn.com/imgextra/i2/249182841/TB2y1DWbgaTBuNjSszfXXXgfpXa_!!249182841.jpg";>
+  <img onclick="hid()"src="https://img.alicdn.com/imgextra/i2/249182841/TB2y1DWbgaTBuNjSszfXXXgfpXa_!!249182841.jpg"; style="display:none";>
+</div> -->
 <script>
 
+function sibling(node,n){//寻找指定兄弟元素节点
+  while(node && n){
+    if(n > 0){
+      if(node.nextElementSibling){
+        node = node.nextElementSibling;
+      }else{
+        for(node = node.nextSibling; node && node.nodeType != 1; node = node.nextSibling);//判断node的nodeType是否为1 如果不为1的话，继续寻找下一个元素节点，此时需要注意的是还需要盘点node是否为null
+      }
+      n -- ;
+    }else{
+      if(node.previousSibling){
+        node = node.previousElementSibling;
+      }else{
+        for(node = node.previousSibling; node && node.nodeType != 1; node = node.previousSibling);
+      }
+      n ++;
+    }
+  }
+  return node;
+}
+
+// Element.prototype.nodetree = function(){
+//   var this.nodeName = [];
+//   if(this.hasChildNodes){
+//     var nodes = this.childNodes;
+//     var len = nodes.length;
+//     for(var i = 0 ; i < len; i ++){
+//        var nodes[i].nodeName = [];
+//     }
+//      return nodes[i].nodetree();
+//   }
+//   this.nodeName.push(this);
+// }
+
+// 深度克隆
+var person = {
+  name : "qiuwei",
+  age : "12",
+  sex : "male",
+  job : "it",
+  card : {
+    master : 1,
+    visa : 1
+  },
+  child : [1,2,3,4,5]
+}
+
+var personclone = {};
+function deepclone(Target,Origin){
+  var Target = Target || {};
+  var object = "[object Object]";
+  var array = "[object Array]";
+  for(var prop in Origin){
+    if(typeof(Origin[prop]) == "object"){
+      if(Object.prototype.toString.call(Origin[prop]) == object ){
+         Target[prop] = {};
+      }
+      if(Object.prototype.toString.call(Origin[prop]) == array){
+         Target[prop] = [];
+      }
+      deepclone(Target[prop],Origin[prop]);
+    }else{
+      Target[prop] = Origin[prop];
+    }
+  }
+}
+
+function bianli(node,n){//寻找第N位祖先元素节点
+  while(n){
+    if(node.parentNode.nodeType == 1){
+      node = node.parentNode;
+    }
+    n--
+  }
+  return node.nodeName;
+}
+var  p = document.getElementsByTagName("p")[0];
+
+Element.prototype.foeach = function(){
+  var arr = [];
+    if(this.hasChildNodes == true){
+      var len = this.childNodes.length;
+      for(var i = 0 ; i < len ; i ++){
+        this.childNodes[i].foeach();
+      }
+    }else{
+      return arr.push(this.nodeName) ;
+    }
+}
+// var div = document.getElementsByTagName("div")[3];
+//
+// var tab = document.getElementsByClassName("tab")[0];
+// var showtab = document.getElementsByClassName("showtab")[0];
+// var fullbg = document.getElementsByClassName("fullbg")[0];
+// var ul = document.getElementById("products");
+//
+// ul.addEventListener("click",function(){
+//   var e = e || window.event;
+//   var target = e.target || e.srcElement;
+//   if(target.nodeName == "BUTTON"){
+//     target.parentNode.parentNode.parentNode.removeChild(target.parentNode.parentNode);
+//   }
+// });
+//
+// fullbg.addEventListener("click",function(){
+//   showtab.style.display = "none";
+//   fullbg.style.display = "none";
+// });
+//
+// function show(){
+//   showtab.style.display = "block";
+//   fullbg.style.display = "block";
+//   $.ajax({
+//     type : "GET",
+//     url : "add_product.php",
+//     success:function(e){
+//       $(".showtab").html(e);
+//     }
+//   });
+// }
+//
+// function ajax(para){
+//   var para = {};
+//   var iteams = document.getElementById("iteam").value;
+//   // var xmlhttp = new XMLHttpRequest() || new ActiveXObject("Microsoft.XMLHTTP");
+//   if (window.XMLHttpRequest)
+//       {// code for IE7+, Firefox, Chrome, Opera, Safari
+//      var  xmlhttp=new XMLHttpRequest();
+//       }
+//      else
+//       {// code for IE6, IE5
+//      var  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+//       }
+//   xmlhttp.onreadystatechange = function(){
+//     if(xmlhttp.readyState == 4 && xmlhttp.status == 200 ){
+//       var n = xmlhttp.responseText;
+//      $("#products").append(n);
+//       hide();
+//     }
+//     }
+//       xmlhttp.open("POST","add_append.php",true);
+//       xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+//       xmlhttp.send("iteam=" + iteams);
+//
+//
+// }
+// function btgod() {
+//    var iteams = document.getElementById("iteam").value;
+//    if (window.XMLHttpRequest)
+//     {// code for IE7+, Firefox, Chrome, Opera, Safari
+//    var  xmlhttp=new XMLHttpRequest();
+//     }
+//    else
+//     {// code for IE6, IE5
+//    var  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+//     }
+//   // var xmlhttp = new XMLHttpRequest() || new ActiveObject("Microfost XMLHTTP");
+//     xmlhttp.onreadystatechange = function(){
+//     if(xmlhttp.readyState == 4 && xmlhttp.status == 200 ){
+//       document.getElementById("products").innerHTML = xmlhttp.responseText;
+//       hide();
+//     }
+//     }
+//     xmlhttp.open("POST","add_append.php",true);
+//     xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+//     xmlhttp.send("iteam="+iteams);
+//
+//
+// }
+
+function btgod(){//执行添加商品列表
+     //按钮单击时执行
+           //Ajax调用处理
+           var iteams = document.getElementById("iteam").value;
+           var len = iteams.length;
+           ajax({
+              url : "add_append.php",
+              success : function(){
+
+            },
+              type : "POST",
+              bool : true,
+              data : "iteam="+iteams
+           });
+
+        //  $.ajax({
+        //     type: "POST",
+        //     async: false,
+        //     url: "add_append.php",
+        //     data: "iteam="+iteams,
+        //     success: function(date){
+        //      $("#products").append(date);
+        //      hide();
+        //        }
+        //  });
+
+    }
+function hide() {
+  showtab.style.display = "none";
+  fullbg.style.display = "none";
+}
 // Element.prototype.insertAfter = function(target,origin){
 //   var nextorigin = origin.nextSibling;
 //   this.insertBefore(target,nextorigin);
@@ -167,82 +531,9 @@
 //将字符串分割成数组，并且每位循环以后返回成大写的名称，并返回数组 利用字符串总长度来判断单位，而后将数组键值后面加上单位，再把数组还原成字符串
 
  ?>
-<style media="screen">
-  .content{
-    width: 100px;
-    height: 100px;
-    border: solid 1px black;
-    background: red;
-    display: none;
-
-  }
-  .active{
-
-    background-color: yellow;
-
-  }
-
-</style>
-<ul>
-
-<button type="button" class="taboff" id="1" onclick="tabit(1)" >1 <div  class="content">
-111
- </div></button>
- <button  type="button" class="taboff" id="2" onclick="tabit(2)" >2 <div  class="content">
- 222
-  </div></button>
-  <button type="button" class="taboff" id="3" onclick="tabit(3)" >3 <div  class="content">
-  333
-   </div></button>
-</ul>
 
 
 
-
- <script>
- var lastTab; //临时存储上次时的tab ID值
-
- function tabit(cid) {
-
- //如果上次有存储值，且和本次请求切换的是同一个，那么直接提前结束
-
- if( lastTab && lastTab == cid)
-           return;
-
- //否则，改变上次的tab状态为隐藏状态，并且置换本次请求的tab为当前状态
-
- /*这里要注意考虑第一次触发这个函数的情况，因为这个时候lastTab是undefined，所以直接查找id对应的元素肯定会报js错误的*/
- if(lastTab) {
-     gi(lastTab).className = "taboff";
-     var n  = gt("button")[(lastTab - 1)];
-     n.getElementsByTagName("div")[0].style.display = "none";
-
- }
-
- gi(cid).className="active";
- var n  = gt("button")[(cid-1)];
- n.getElementsByTagName("div")[0].style.display = "block";
-
-
- //最后将本次的tab记录下来以备下次切换使用
-
- lastTab = cid;
- }
-
- //根据id获取对应的元素对象
-
- function gi(id) {
-
-         return document.getElementById(id);
-
- }
-function gt(tag){
-  return document.getElementsByTagName(tag);
-}
-
-
-
- </script>
  <!-- <script>
 
  function add(){
