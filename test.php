@@ -44,6 +44,17 @@
     z-index: 99;
     position: absolute;
   }
+  .chosed{
+    width: 20px;
+    height: 20px;
+    border-radius:50%;
+    border: 0.3px black solid;
+    background: gray;
+    opacity:1;
+    top:90%;
+    z-index: 99;
+    position: absolute;
+  }
 
 </style>
 <div class="wrapper">
@@ -53,22 +64,25 @@
 <div style="right:20px;" class="arrow">
 
 </div>
-<div style="left:40%" class="chose">
+<div class="">
+  <div style="left:40%" class="chosed">
 
-</div>
-<div style="left:45%" class="chose">
+  </div>
+  <div style="left:45%" class="chose">
 
-</div>
-<div style="left:50%" class="chose">
+  </div>
+  <div style="left:50%" class="chose">
 
-</div>
-<div style="left:55%" class="chose">
+  </div>
+  <div style="left:55%" class="chose">
 
-</div>
-<div style="left:60%" class="chose">
+  </div>
+  <div style="left:60%" class="chose">
 
+  </div>
 </div>
-  <div class="showbox" style="position: relative; left:0;">
+
+  <div class="showbox" style="position: relative; left:0;transition: all 0.5s;">
     <ul class="img">
       <li><img src="https://img.alicdn.com/imgextra/i1/249182841/TB2.it5kXXXXXbXXXXXXXXXXXXX_!!249182841.jpg" alt=" 聚划算首页20160207_26.jpg"/></li>
       <li><img src="https://img.alicdn.com/imgextra/i4/249182841/TB28kx.kXXXXXX7XXXXXXXXXXXX_!!249182841.jpg" alt=" 聚划算首页20160207_29.jpg"/></li>
@@ -84,40 +98,55 @@
     //
     var div = document.getElementsByClassName("showbox")[0];
     var arrow = document.getElementsByClassName("arrow");
-    var chose = document.getElementsByClassName("chose");
+    var chose = document.getElementsByTagName("div")[3].getElementsByTagName("div");
     var choselen = chose.length;
     //自动轮播 考虑是否加入onload事件
-    function automove(){
-      div.style.left = parseInt(div.style.left) - 990 + "px";
-      imgindex ++;
-      if(parseInt(div.style.left) < - 3960){
-        div.style.left = 0 + "px";
+    function automove(){//轮播图下标原点变换
+      for(var i = 0 ; i < choselen ; i++){
+        chose[i].className = "chose";
       }
+      chose[imgindex].className = "chosed";
     }
     // 自动轮播创建
-    var timer = setInterval("automove()",3000);
+    var timer = setInterval("next()",1000);
+    var timers = setInterval("automove()",1000);
     //自动轮播重新执行
     function automoveagin(){
-    timer = setInterval("automove()",3000);
+    timer = setInterval("next()",1000);
+    timers = setInterval("automove()",1000);
     }
     function stopmove(){
       clearInterval(timer);
+      clearInterval(timers);
       timer = "";//timer值变为空
+      timers = "";
     }
+
     function next(){
       div.style.left = parseInt(div.style.left) - 990 + "px";
+      imgindex ++;
+      for(var i = 0 ; i < choselen ; i++){
+        chose[i].className = "chose";
+      }
       if(parseInt(div.style.left) < - 3960){
         div.style.left = 0 + "px";
-        imgindex ++;
+        imgindex = 0;
       }
+      chose[imgindex].className = "chosed";
     }
 
     function previous(){
       div.style.left = parseInt(div.style.left) + 990 + "px";
+      imgindex --;
+      for(var i = 0 ; i < choselen ; i++){
+        chose[i].className = "chose";
+      }
       if(parseInt(div.style.left) > 0){
         div.style.left = - 3960 + "px";
+        imgindex = choselen - 1;
       }
-      imgindex --;
+      chose[imgindex].className = "chosed";
+
     }
     //选择器
 
@@ -136,10 +165,11 @@
       (function(s){
         chose[s].onclick = function(){
           for(var m = 0 ; m < choselen ; m ++){
-            chose[m].style.opacity = 0.5
+            chose[m].className = "chose";
           }
           div.style.left = - s * 990 + "px";
-          this.style.opacity = 1;
+          this.className = "chosed";
+          imgindex = s;
           }
       }(i));
     }
